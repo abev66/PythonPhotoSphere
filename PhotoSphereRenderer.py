@@ -11,7 +11,7 @@ import urllib, cStringIO
 
 from ArcBall import *                 # ArcBallT and this tutorials set of points/vectors/matrix types
 
-PI2 = 2.0*3.1415926535            # 2 * PI (not squared!)         // PI Squared
+PI2 = 2.0*3.14159265358979323846264338327950288419716939937510            # 2 * PI (not squared!)         // PI Squared
 
 # *********************** Globals *********************** 
 # Python 2.2 defines these directly
