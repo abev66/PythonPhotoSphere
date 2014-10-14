@@ -77,6 +77,7 @@ def loadImage( imageName = "/local/photo/SR71.jpg" ): # "/local/photo/montagna.j
     
     if (width>8192) or (height>4096):
         im.thumbnail((8192,4096))
+        width, height = im.size
     
     c = numpy.asarray(im, numpy.uint8)
             
