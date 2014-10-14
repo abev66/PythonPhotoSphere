@@ -75,7 +75,15 @@ def keyPressed(*args):
         gluDeleteQuadric (g_quadratic)
         sys.exit ()
 
+def urlEncodeNonAscii(b):
+    return re.sub('[\x80-\xFF]', lambda c: '%%%02x' % ord(c.group(0)), b)
 
+def iriToUri(iri):
+    parts= urlparse.urlparse(iri)
+    return urlparse.urlunparse(
+            part.encode('idna') if parti==1 else urlEncodeNonAscii(part.encode('utf-8'))
+            for parti, part in enumerate(parts)
+            )
 
 def main():
     global window
@@ -176,7 +184,7 @@ class Example(QtGui.QWidget):
         
     def showDialog(self):
         global fileUrl
-        text = (str(self.le.text()))
+        text = (iriToUri(unicode(self.le.text())))
         fileUrl = text
         QtCore.QCoreApplication.instance().quit()
             
