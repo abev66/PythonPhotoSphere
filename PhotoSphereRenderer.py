@@ -65,9 +65,6 @@ g_texWidth = 0
 g_texHeight = 0
 g_texData = 0
 
-g_pctOffset=0.15
-
-
 def loadImage( imageName = "/local/photo/SR71.jpg" ): # "/local/photo/montagna.jpg" ):
     global g_texWidth
     global g_texHeight
@@ -87,22 +84,7 @@ def loadImage( imageName = "/local/photo/SR71.jpg" ): # "/local/photo/montagna.j
 #    im = Image.open("/home/paolo/Desktop/GLBALL/GLball/wall01.tga")
     width, height = im.size
     
-    pixels = im.getdata()
-    pixelData = im.load()
-    
-    c  = numpy.zeros(width * int (height * (1 + 2*g_pctOffset))  * 3, numpy.uint8)
-    rowSkip = int (height*g_pctOffset)
-    
-    curHeight =     int (height * (1+2*g_pctOffset))
-    
-    for hj in range(curHeight):    
-        for i in range(width):
-            j = hj - rowSkip
-            if (j >= 0) and (j < height):
-                d = pixelData[i,j]
-                c[3*(hj*width + i) ] = d[0]
-                c[3*(hj*width + i)+1 ] = d[1]
-                c[3*(hj*width + i)+2 ] = d[2] 
+    c = numpy.asarray(im, numpy.uint8)
             
     g_texWidth, g_texHeight, g_texData = width, height, c
     g_texWidth, g_texHeight, g_texData = width, curHeight, c
