@@ -142,15 +142,15 @@ def Upon_Drag (cursor_x, cursor_y):
         and pases the mouse cursor postion in window coords as the mouse moves.
     """
     global g_isDragging, g_rightDragging, g_midDragging, g_LastRot, g_Transform, g_ThisRot, g_fLastScale, g_fThisScale , g_vecLastTranslation, g_vecThisTranslation
-    global g_Rotation, g_Translation, g_Scaling, screen_width
+    global g_Rotation, g_Translation, g_Scaling, screen_width, screen_height
 
     mouse_pt = Point2fT (cursor_x, cursor_y)
     if (g_isDragging):
         #print "g_leftDragging"
         if cursor_x > screen_width-2:
-            glutWarpPointer( 2, cursor_y )
+            glutWarpPointer( 2, screen_height-cursor_y )
         elif cursor_x < 2:
-            glutWarpPointer( screen_width-2, cursor_y )
+            glutWarpPointer( screen_width-2, screen_height-cursor_y )
         
         ThisQuat = g_ArcBall.drag (mouse_pt)                        # // Update End Vector And Get Rotation As Quaternion
         g_ThisRot = Matrix3fSetRotationFromQuat4f (ThisQuat)        # // Convert Quaternion Into Matrix3fT
