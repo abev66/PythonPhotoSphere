@@ -86,13 +86,15 @@ def loadImage( imageName = "/local/photo/SR71.jpg" ): # "/local/photo/montagna.j
 # A general OpenGL initialization function.  Sets all of the initial parameters. 
 def Initialize (Width, Height, fileUrl):                # We call this right after our OpenGL window is created.
     global g_quadratic
-    global g_textures
+    global g_textures, screen_width, screen_height
     
     #loadImage("file:///local/www/web/wci/uppete/ups/PANO_20130727_160023403796945.jpg")
     #loadImage("http://bonas.us/uppete/ups/PANO_20130727_160023403796945.jpg")
     loadImage(fileUrl)
 
-
+    # Get Screen Size
+    screen_width = int( glutGet( GLUT_SCREEN_WIDTH ) )
+    screen_height = int( glutGet ( GLUT_SCREEN_HEIGHT ) )
 
     glClearColor(0.0, 0.0, 0.0, 1.0)                    # This Will Clear The Background Color To Black
     glClearDepth(1.0)                                    # Enables Clearing Of The Depth Buffer
@@ -140,12 +142,16 @@ def Upon_Drag (cursor_x, cursor_y):
         and pases the mouse cursor postion in window coords as the mouse moves.
     """
     global g_isDragging, g_rightDragging, g_midDragging, g_LastRot, g_Transform, g_ThisRot, g_fLastScale, g_fThisScale , g_vecLastTranslation, g_vecThisTranslation
-    global g_Rotation, g_Translation, g_Scaling
+    global g_Rotation, g_Translation, g_Scaling, screen_width
 
     mouse_pt = Point2fT (cursor_x, cursor_y)
     if (g_isDragging):
         #print "g_leftDragging"
-
+        if cursor_x > screen_width-2:
+            glutWarpPointer( 2, cursor_y )
+        elif cursor_x < 2:
+            glutWarpPointer( screen_width-2, cursor_y )
+        
         ThisQuat = g_ArcBall.drag (mouse_pt)                        # // Update End Vector And Get Rotation As Quaternion
         g_ThisRot = Matrix3fSetRotationFromQuat4f (ThisQuat)        # // Convert Quaternion Into Matrix3fT
         # Use correct Linear Algebra matrix multiplication C = A * B
