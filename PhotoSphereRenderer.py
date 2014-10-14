@@ -70,33 +70,14 @@ def loadImage( imageName = "/local/photo/SR71.jpg" ): # "/local/photo/montagna.j
     global g_texHeight
     global g_texData    
 
-
-
     file = cStringIO.StringIO(urllib.urlopen(imageName).read())
     im = Image.open(file)
-    #im = Image.open(imageName)
-#    try:
-#        g_texWidth, g_texHeight, g_texData = im.size[0], im.size[1], im.tostring("raw", "RGBA", 0, -1)
-#    except SystemError:
-#       g_texWidth, g_texHeight, g_texData = im.size[0], im.size[1], im.tostring("raw", "RGBX", 0, -1)
-#       
-#       
-#    im = Image.open("/home/paolo/Desktop/GLBALL/GLball/wall01.tga")
+
     width, height = im.size
     
     c = numpy.asarray(im, numpy.uint8)
             
     g_texWidth, g_texHeight, g_texData = width, height, c
-    g_texWidth, g_texHeight, g_texData = width, curHeight, c
-    
-#    imOutput = Image.new( 'RGB', (width,height), "black") # create a new black image
-#    pixelsOutput = imOutput.load() # create the pixel map
-#    for j in range(height):    
-#        for i in range(width): 
-#            pixelsOutput[i,j] = (c[3*(j*width + i) ], c[3*(j*width + i)+1 ], c[3*(j*width + i)+2 ])
-#        
-#    
-#    imOutput.show()
 
 # A general OpenGL initialization function.  Sets all of the initial parameters. 
 def Initialize (Width, Height, fileUrl):                # We call this right after our OpenGL window is created.
