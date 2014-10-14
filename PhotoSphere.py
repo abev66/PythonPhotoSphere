@@ -1,3 +1,6 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+#
 # This tool is based on NeHe Tutorial Lesson 48 pythonic version
 # created by Brian Leair.
 # It has been modified by Paolo Angelelli ((c) 2013)
