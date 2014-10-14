@@ -117,7 +117,7 @@ def main():
     glutDisplayFunc(Draw)
     
     # Uncomment this line to get full screen.
-    #glutFullScreen()
+    glutFullScreen()
 
     # When we are doing nothing, redraw the scene.
     glutIdleFunc(Draw)
@@ -143,6 +143,12 @@ def main():
     # GL calls.
     # Call to perform inital GL setup (the clear colors, enabling modes
     Initialize (640, 480, fileUrl)
+
+    # Reset Cursor Position 
+    middleX = int(glutGet( GLUT_SCREEN_WIDTH ) / 2)
+    middleY = int(glutGet( GLUT_SCREEN_HEIGHT ) / 2)
+    
+    glutWarpPointer(middleX, middleY)
 
     # Start Event Processing Engine    
     glutMainLoop()
