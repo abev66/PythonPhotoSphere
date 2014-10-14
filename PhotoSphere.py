@@ -200,7 +200,11 @@ def qtmain():
 
 
 if __name__ == '__main__':
-    ret = qtmain()
+    if len(sys.argv)>1:
+        global fileUrl
+        fileUrl = 'file://'+sys.argv[1]
+    else:
+        ret = qtmain()
     # Your code that must run when the application closes goes here
     main()
     sys.exit(ret)
